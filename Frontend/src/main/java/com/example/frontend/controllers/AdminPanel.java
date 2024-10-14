@@ -7,6 +7,7 @@ import com.example.frontend.TCP.enums.RequestType;
 import com.example.frontend.TCP.enums.ResponseType;
 import com.example.frontend.dto.UserDTO;
 import com.example.frontend.mappers.MapToUserDTO;
+import com.example.frontend.models.entities.Project;
 import com.example.frontend.models.entities.User;
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,11 +20,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,6 +36,8 @@ import java.util.stream.Collectors;
 
 public class AdminPanel implements Initializable {
 
+    @FXML
+    private TextField search;
     @FXML
     private Label message;
     @FXML
@@ -63,6 +64,7 @@ public class AdminPanel implements Initializable {
     private Button BackToPreviousPage;
 
     private ObservableList<UserDTO> observableUserDTOList;
+    private List<UserDTO> userDTOList;
 
     public void BackButtonPressed(ActionEvent actionEvent) throws IOException {
         Stage stage= (Stage) BackToPreviousPage.getScene().getWindow();
@@ -77,7 +79,7 @@ public class AdminPanel implements Initializable {
         try {
             Response response = new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
             User[] users = new Gson().fromJson(response.getMessage(), User[].class);
-            List<UserDTO> userDTOList = Arrays.stream(users)
+            userDTOList = Arrays.stream(users)
                     .map(MapToUserDTO::mapToUserDto)
                     .collect(Collectors.toList());
             observableUserDTOList = FXCollections.observableArrayList(userDTOList);
@@ -178,5 +180,17 @@ public class AdminPanel implements Initializable {
 
     }
 
+    public void SearchChanged(KeyEvent keyEvent) {
+        String searchText = search.getText().toLowerCase();
 
+        List<UserDTO> filteredUserDto = userDTOList.stream().filter(userDTO -> {
+                  return   userDTO.getName().toLowerCase().contains(searchText) ||
+                            userDTO.getLogin().toLowerCase().contains(searchText) ||
+                          userDTO.getSurname().toLowerCase().contains(searchText);
+                }
+        ).collect(Collectors.toList());
+        observableUserDTOList.setAll(filteredUserDto);
+        table.setItems(observableUserDTOList);
+
+    }
 }
