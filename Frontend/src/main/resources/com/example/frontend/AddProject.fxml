@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="441.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.AddProject">
+   <children>
+      <Button fx:id="BackButton" layoutX="78.0" layoutY="363.0" mnemonicParsing="false" onAction="#BackButton_pressed" text="Назад" />
+      <Button defaultButton="true" layoutX="176.0" layoutY="363.0" mnemonicParsing="false" onAction="#CommitChanges" text="Сохранить" />
+      <TextField fx:id="name" layoutX="76.0" layoutY="63.0" />
+      <Label layoutX="76.0" layoutY="46.0" text="Название" />
+      <TextArea fx:id="description" layoutX="76.0" layoutY="120.0" prefHeight="99.0" prefWidth="209.0" />
+      <Label layoutX="76.0" layoutY="102.0" text="Описание" />
+      <Label layoutX="350.0" layoutY="46.0" text="Бюджет" />
+      <TextField fx:id="status" layoutX="350.0" layoutY="120.0" />
+      <Label layoutX="350.0" layoutY="102.0" text="Статус" />
+      <DatePicker fx:id="start_date" layoutX="76.0" layoutY="257.0" />
+      <Label layoutX="74.0" layoutY="239.0" text="Начало исследования" />
+      <DatePicker fx:id="end_date" layoutX="76.0" layoutY="312.0" />
+      <Label layoutX="74.0" layoutY="294.0" text="Конец исследования" />
+      <TextField fx:id="budget" layoutX="350.0" layoutY="63.0" />
+      <Label layoutX="74.0" fx:id="message" layoutY="409.0" prefHeight="18.0" prefWidth="498.0" visible="false" />
+   </children>
+</AnchorPane>

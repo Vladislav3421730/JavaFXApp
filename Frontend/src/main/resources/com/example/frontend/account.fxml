@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.Account">
+   <children>
+      <TextField fx:id="name" layoutX="46.0" layoutY="57.0" />
+      <Label layoutX="46.0" layoutY="40.0" text="Имя" />
+      <TextField fx:id="surname" layoutX="225.0" layoutY="57.0" />
+      <Label layoutX="225.0" layoutY="40.0" text="Фамилия" />
+      <TextField fx:id="login" layoutX="46.0" layoutY="121.0" />
+      <Label layoutX="46.0" layoutY="103.0" text="Логин" />
+      <TextField fx:id="email" layoutX="225.0" layoutY="121.0" />
+      <Label layoutX="225.0" layoutY="103.0" text="email" />
+      <TextField fx:id="age" layoutX="46.0" layoutY="174.0" />
+      <Label layoutX="46.0" layoutY="156.0" text="Возраст" />
+      <TextField fx:id="salary" layoutX="46.0" layoutY="231.0" />
+      <Label layoutX="48.0" layoutY="213.0" text="Зарплата" />
+      <RadioButton fx:id="Male" layoutX="231.0" layoutY="178.0" mnemonicParsing="false" text="М" />
+      <RadioButton fx:id="Female" layoutX="288.0" layoutY="178.0" mnemonicParsing="false" text="Ж" />
+      <Label layoutX="233.0" layoutY="156.0" text="Пол" />
+      <Button fx:id="CommitChangesButton" defaultButton="true" layoutX="44.0" layoutY="289.0" mnemonicParsing="false" onAction="#CommitChanges" prefHeight="26.0" prefWidth="80.0" text="Сохранить">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BackButton" layoutX="137.0" layoutY="289.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="26.0" prefWidth="98.0" text="На главную">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="message" layoutX="46.0" layoutY="333.0" prefHeight="18.0" prefWidth="536.0" textFill="#ea2d2d" visible="false" />
+      <TextField fx:id="position" layoutX="225.0" layoutY="231.0" />
+      <Label layoutX="224.0" layoutY="213.0" text="Должность" />
+   </children>
+</AnchorPane>

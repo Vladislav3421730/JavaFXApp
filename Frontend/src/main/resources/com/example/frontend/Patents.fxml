@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.Patents">
+   <children>
+      <Button fx:id="BackButton" layoutX="48.0" layoutY="42.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Назад" />
+      <Button layoutX="116.0" layoutY="41.0" mnemonicParsing="false" onAction="#AddPatentPressed" prefHeight="26.0" prefWidth="168.0" text="Добавить патент в таблицу" />
+       <Label fx:id="message" layoutX="300.0" layoutY="25.0" prefHeight="23.0" prefWidth="604.0" textFill="#d42424" visible="false" />
+       <TableView fx:id="table" layoutX="48.0" layoutY="89.0" prefHeight="200.0" prefWidth="693.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="name" prefWidth="75.0" text="Название" />
+            <TableColumn fx:id="company" prefWidth="75.0" text="Компания" />
+            <TableColumn fx:id="cost" prefWidth="75.0" text="Стоимость" />
+            <TableColumn fx:id="dateStart" prefWidth="92.20001220703125" text="Дата начала" />
+            <TableColumn fx:id="temp" prefWidth="102.40005493164062" text="Срок патента" />
+            <TableColumn fx:id="editing" prefWidth="119.20001220703125" text="Редактирование" />
+            <TableColumn fx:id="deleting" prefWidth="74.4000244140625" text="Удаление" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

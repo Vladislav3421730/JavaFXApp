@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="527.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.AdminPanel">
+   <children>
+      <Button fx:id="BackToPreviousPage" layoutX="22.0" layoutY="22.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Назад" />
+      <TableView fx:id="table" layoutX="22.0" layoutY="64.0" prefHeight="500.0" prefWidth="970.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="login" prefWidth="101.19998168945312" text="Логин" />
+            <TableColumn fx:id="roles" prefWidth="152.1999969482422" text="Роли" />
+            <TableColumn fx:id="name" minWidth="7.20001220703125" prefWidth="110.20001220703125" text="Имя" />
+            <TableColumn fx:id="surname" prefWidth="94.60003662109375" text="Фамилия" />
+            <TableColumn fx:id="salary" prefWidth="87.79998779296875" text="Зарплата" />
+            <TableColumn fx:id="bun" prefWidth="110.0" text="Бан" />
+            <TableColumn fx:id="role" prefWidth="120.0" text="Менеджер" />
+            <TableColumn fx:id="delete" prefWidth="110.0" text="Удалить" />
+        </columns>
+      </TableView>
+      <Label fx:id="message" layoutX="103.0" layoutY="26.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

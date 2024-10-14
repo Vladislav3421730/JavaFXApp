@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.AddPatent">
+   <children>
+      <Button fx:id="BackButton" layoutX="57.0" layoutY="346.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Назад" />
+      <TextField fx:id="name" layoutX="57.0" layoutY="49.0" />
+      <Label layoutX="57.0" layoutY="32.0" text="Название патента" />
+      <TextField fx:id="companyName" layoutX="58.0" layoutY="99.0" />
+      <Label layoutX="58.0" layoutY="82.0" text="Название компании" />
+      <TextField fx:id="term" layoutX="59.0" layoutY="153.0" />
+      <Label layoutX="59.0" layoutY="135.0" text="Срок действяи патента(в годах)" />
+      <DatePicker fx:id="dateStart" layoutX="59.0" layoutY="211.0" />
+      <Label layoutX="59.0" layoutY="192.0" text="Дата начала патента" />
+      <TextField fx:id="coast" layoutX="58.0" layoutY="278.0" />
+      <Label layoutX="58.0" layoutY="260.0" text="Стоимсоть патента за всё время" />
+      <Button defaultButton="true" layoutX="130.0" layoutY="346.0" mnemonicParsing="false" onAction="#SaveButtonPressed" text="Сохранить" />
+      <Label fx:id="message" layoutX="74.0" layoutY="409.0" prefHeight="18.0" prefWidth="498.0" visible="false" />
+   </children>
+</AnchorPane>

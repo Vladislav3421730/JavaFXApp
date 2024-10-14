@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="320.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.Login">
+   <children>
+      <Button fx:id="ButtonRegister" layoutX="66.0" layoutY="224.0" mnemonicParsing="false" onAction="#Register" text="Регистрация" textAlignment="CENTER" />
+      <Button fx:id="ButtonLogin" defaultButton="true" layoutX="182.0" layoutY="224.0" mnemonicParsing="false" onAction="#Login" text="Вход" />
+
+
+      <TextField fx:id="login" layoutX="72.0" layoutY="100.0" prefHeight="26.0" prefWidth="160.0" />
+      <PasswordField fx:id="password" layoutX="72.0" layoutY="167.0" prefHeight="26.0" prefWidth="160.0" />
+
+      <Label layoutX="102.0" layoutY="26.0" text="Вход">
+         <font>
+            <Font name="Arial" size="43.0" />
+         </font></Label>
+
+
+      <Label layoutX="72.0" layoutY="82.0" text="Логин:" />
+      <Label layoutX="75.0" layoutY="143.0" prefWidth="53.0" text="Пароль:" />
+      <Label fx:id="message" layoutX="12.0" layoutY="266.0" prefHeight="18.0" prefWidth="265.0" textFill="#bf1c1c" visible="false" />
+
+   </children>
+
+
+</AnchorPane>

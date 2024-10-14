@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="483.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.DefaultPage">
+   <children>
+      <Button fx:id="AdminPanelButton" defaultButton="true" layoutX="561.0" layoutY="38.0" mnemonicParsing="false" onAction="#AdminPanelPressed" prefHeight="32.0" prefWidth="116.0" text="Панель админа" visible="false">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="message" layoutX="57.0" layoutY="445.0" prefHeight="23.0" prefWidth="604.0" textFill="#d42424" visible="false" />
+      <Button fx:id="AccountButton" layoutX="48.0" layoutY="42.0" mnemonicParsing="false" onAction="#AccountButtonPressed" prefHeight="32.0" prefWidth="124.0" text="Личный кабинет">
+         <font>
+            <Font name="Arial Italic" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="57.0" layoutY="411.0" mnemonicParsing="false" onAction="#BackToPreviousPage" prefHeight="18.0" prefWidth="80.0" text="Назад">
+         <font>
+            <Font name="Arial Italic" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ManagerPanelButton" defaultButton="true" layoutX="296.0" layoutY="42.0" mnemonicParsing="false" onAction="#ManagerPanelButton_Pressed" prefHeight="32.0" prefWidth="143.0" text="Панель менеджера" visible="false">
+         <font>
+            <Font name="Arial Italic" size="12.0" />
+         </font>
+      </Button>
+      <TableView fx:id="Projects" layoutX="54.0" layoutY="123.0" prefHeight="276.0" prefWidth="639.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="29.199981689453125" text="id" />
+          <TableColumn fx:id="name" prefWidth="103.39999389648438" text="Название" />
+            <TableColumn fx:id="description" prefWidth="130.1999969482422" text="Описание" />
+            <TableColumn fx:id="start" prefWidth="85.60003662109375" text="Начало" />
+            <TableColumn fx:id="end" prefWidth="82.0" text="Конец" />
+            <TableColumn fx:id="budget" prefWidth="77.19998168945312" text="Бюджет" />
+            <TableColumn fx:id="status" prefWidth="128.8000366210938" text="Статус" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

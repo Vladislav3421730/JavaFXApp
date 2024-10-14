@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="551.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.Registration">
+   <children>
+      <Label layoutX="70.0" layoutY="30.0" text="Регистрация">
+         <font>
+            <Font name="Arial" size="28.0" />
+         </font></Label>
+      <TextField fx:id="name" layoutX="70.0" layoutY="94.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="70.0" layoutY="76.0" text="Имя" />
+      <TextField fx:id="surname" layoutX="70.0" layoutY="147.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="70.0" layoutY="129.0" text="Фамилия" />
+      <RadioButton fx:id="male" layoutX="69.0" layoutY="211.0" mnemonicParsing="false" text="Муж" />
+      <RadioButton fx:id="female" layoutX="127.0" layoutY="211.0" mnemonicParsing="false" text="Жен" />
+      <Label layoutX="68.0" layoutY="188.0" text="Пол:" />
+      <TextField fx:id="email" layoutX="70.0" layoutY="259.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="68.0" layoutY="241.0" text="email" />
+      <TextField fx:id="login" layoutX="70.0" layoutY="316.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="71.0" layoutY="298.0" prefHeight="18.0" prefWidth="39.0" text="Логин" />
+      <PasswordField fx:id="password" layoutX="70.0" layoutY="372.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="71.0" layoutY="353.0" prefHeight="18.0" prefWidth="50.0" text="Пароль" />
+      <PasswordField fx:id="confirmPassword" layoutX="70.0" layoutY="429.0" prefHeight="26.0" prefWidth="204.0" />
+      <Label layoutX="70.0" layoutY="411.0" prefHeight="18.0" prefWidth="129.0" text="Повторите пароль" />
+      <Button fx:id="BackButton" layoutX="68.0" layoutY="480.0" mnemonicParsing="false" onAction="#BackToPreviousPage" text="Назад" />
+      <Button fx:id="RegisterButton" defaultButton="true" layoutX="150.0" layoutY="480.0" mnemonicParsing="false" onAction="#Register" text="Зарегистрироваться" />
+      <Label fx:id="message" layoutX="6.0" layoutY="520.0" prefHeight="18.0" prefWidth="309.0" textFill="#cc1c1c" visible="false" />
+   </children>
+</AnchorPane>
