@@ -4,15 +4,10 @@ import com.example.frontend.TCP.ClientSocket;
 import com.example.frontend.TCP.Request;
 import com.example.frontend.TCP.Response;
 import com.example.frontend.TCP.enums.RequestType;
-import com.example.frontend.TCP.enums.ResponseType;
-import com.example.frontend.dto.UserDTO;
-import com.example.frontend.mappers.MapToUserDTO;
 import com.example.frontend.models.entities.Project;
 import com.example.frontend.models.entities.User;
 import com.example.frontend.models.enums.Role;
-
 import com.google.gson.Gson;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,11 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -37,6 +30,8 @@ import java.util.stream.Collectors;
 
 public class DefaultPage implements Initializable {
 
+    @FXML
+    private TextField search;
     @FXML
     private TableColumn<Project,Integer> id;
 
@@ -68,6 +63,7 @@ public class DefaultPage implements Initializable {
     private Button AdminPanelButton;
 
     private ObservableList<Project> observableProjectList;
+    private List<Project> projectList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,7 +90,7 @@ public class DefaultPage implements Initializable {
         try {
             Response response = new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
             Project[] projects = new Gson().fromJson(response.getMessage(), Project[].class);
-            List<Project> projectList = Arrays.stream(projects).collect(Collectors.toList());
+            projectList = Arrays.stream(projects).collect(Collectors.toList());
             observableProjectList = FXCollections.observableArrayList(projectList);
             Projects.setItems(observableProjectList);
 
@@ -144,5 +140,17 @@ public class DefaultPage implements Initializable {
         Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/frontend/ManagerPanel.fxml")));
         stage.setTitle("Панель менеджера");
         stage.setScene(new Scene(root));
+    }
+
+    public void SearchChanged(KeyEvent event) {
+        String searchText = search.getText().toLowerCase();
+
+        List<Project> filteredProjects = projectList.stream().filter(project ->
+                project.getName().toLowerCase().contains(searchText) ||
+                        project.getDescription().toLowerCase().contains(searchText)
+        ).collect(Collectors.toList());
+        observableProjectList.setAll(filteredProjects);
+        Projects.setItems(observableProjectList);
+
     }
 }
