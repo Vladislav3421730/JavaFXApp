@@ -5,7 +5,6 @@ import com.example.frontend.TCP.Request;
 import com.example.frontend.TCP.Response;
 import com.example.frontend.TCP.enums.RequestType;
 import com.example.frontend.models.entities.Equipment;
-import com.example.frontend.models.entities.Patent;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,12 +17,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
 public class AddEquipment {
 
+    private Equipment equipment;
+
+    @FXML
+    private Button SaveButton;
     @FXML
     private TextArea description;
     @FXML
@@ -55,16 +59,35 @@ public class AddEquipment {
         }
         Date startDate=Date.from(Instant.from(dateStart.getValue().atStartOfDay().atZone(ZoneId.systemDefault())));
 
-        Equipment equipment=new Equipment.EquipmentBuilder()
+        Equipment AddEquipment=new Equipment.EquipmentBuilder()
                 .name(name.getText())
-                .cost( BigDecimal.valueOf(Double.parseDouble(cost.getText())))
+                .cost(BigDecimal.valueOf(Double.parseDouble(cost.getText())))
                 .description(description.getText())
                 .purchase_date(startDate)
                 .build();
+        if(equipment!=null){
+            AddEquipment.setId(equipment.getId());
+            ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(AddEquipment), RequestType.UPDATE_EQUIPMENT)));
+        }
+        else  ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(AddEquipment), RequestType.ADD_EQUIPMENT)));
 
-        ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(equipment), RequestType.ADD_EQUIPMENT)));
         ClientSocket.getInstance().getOut().flush();
         Response response=new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
         BackButtonPressed(actionEvent);
+    }
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+        SaveButton.setText("Редактировать");
+        name.setText(equipment.getName());
+        cost.setText(String.valueOf(equipment.getCost()));
+        description.setText(equipment.getDescription());
+        LocalDate localDate = Instant.ofEpochMilli(equipment.getPurchase_date().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        dateStart.setValue(localDate);
     }
 }

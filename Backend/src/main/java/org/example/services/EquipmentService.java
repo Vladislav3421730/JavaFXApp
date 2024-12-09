@@ -22,17 +22,17 @@ public class EquipmentService implements Service<Equipment> {
 
     @Override
     public void DeleteById(int id) {
-
+        equipmentDAO.deleteById(id);
     }
 
     @Override
-    public void Update(Equipment object) {
-
+    public void Update(Equipment equipment) {
+        equipmentDAO.update(equipment);
     }
 
     @Override
     public Equipment FindById(int id) {
-        return null;
+        return equipmentDAO.findById(id).orElse(null);
     }
 
     @Override

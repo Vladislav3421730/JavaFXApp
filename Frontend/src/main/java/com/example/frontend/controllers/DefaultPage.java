@@ -101,9 +101,7 @@ public class DefaultPage implements Initializable {
         }
     }
 
-    private void showUserDetails(User user) {
-        System.out.println("Подробная информация о пользователе: " + user.getPersonData().getName());
-    }
+
     public void AdminPanelPressed(ActionEvent actionEvent) throws IOException {
         if(!ClientSocket.getInstance().getUser().getRoles().contains(Role.ADMIN)){
             message.setText("У вас нет роли ADMIN");

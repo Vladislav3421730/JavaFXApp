@@ -3,10 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.EquipmentController">
+<AnchorPane prefHeight="400.0" prefWidth="811.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.EquipmentC">
    <children>
-      <Button fx:id="BackButton" onAction="#BackButtonPressed" layoutX="44.0" layoutY="34.0" mnemonicParsing="false" text="Назад" />
-      <Button layoutX="118.0" layoutY="34.0" onAction="#AddButtonPressed" mnemonicParsing="false" text="Добавить оборудование" />
+      <Button fx:id="BackButton" layoutX="44.0" layoutY="34.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Назад" />
+      <Button layoutX="118.0" layoutY="34.0" mnemonicParsing="false" onAction="#AddButtonPressed" text="Добавить оборудование" />
+       <Label fx:id="message" layoutX="300.0" layoutY="25.0" prefHeight="23.0" prefWidth="604.0" textFill="#d42424" visible="false" />
+       <TableView fx:id="table" layoutX="41.0" layoutY="84.0" prefHeight="200.0" prefWidth="731.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="33.20001220703125" text="id" />
+          <TableColumn fx:id="name" prefWidth="117.1999740600586" text="Название" />
+            <TableColumn fx:id="cost" prefWidth="68.79998779296875" text="Стоимость" />
+            <TableColumn fx:id="purchase_date" prefWidth="129.60003662109375" text="Дата покупки" />
+            <TableColumn fx:id="description" prefWidth="175.40005493164062" text="Для чего нужен" />
+            <TableColumn fx:id="editing" prefWidth="105.39996337890625" text="Редактирование" />
+            <TableColumn fx:id="deleting" prefWidth="90.5999755859375" text="Удаление" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

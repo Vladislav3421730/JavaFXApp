@@ -16,7 +16,7 @@
       <Label layoutX="59.0" layoutY="192.0" text="Дата начала патента" />
       <TextField fx:id="coast" layoutX="58.0" layoutY="278.0" />
       <Label layoutX="58.0" layoutY="260.0" text="Стоимсоть патента за всё время" />
-      <Button defaultButton="true" layoutX="130.0" layoutY="346.0" mnemonicParsing="false" onAction="#SaveButtonPressed" text="Сохранить" />
+      <Button fx:id="SaveButton" defaultButton="true" layoutX="130.0" layoutY="346.0" mnemonicParsing="false" onAction="#SaveButtonPressed" text="Сохранить" />
       <Label fx:id="message" layoutX="74.0" layoutY="409.0" prefHeight="18.0" prefWidth="498.0" visible="false" />
    </children>
 </AnchorPane>

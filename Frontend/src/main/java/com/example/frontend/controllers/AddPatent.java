@@ -4,11 +4,13 @@ import com.example.frontend.TCP.ClientSocket;
 import com.example.frontend.TCP.Request;
 import com.example.frontend.TCP.Response;
 import com.example.frontend.TCP.enums.RequestType;
+import com.example.frontend.dto.PatentDTO;
 import com.example.frontend.models.entities.Patent;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,12 +21,36 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class AddPatent {
+public class AddPatent  {
+
+    private  Patent patent;
+
+
+    public Patent getPatent() {
+        return patent;
+    }
+
+    public void setPatent(Patent patent) {
+        this.patent = patent;
+        SaveButton.setText("Редактировать");
+        name.setText(patent.getName());
+        companyName.setText(patent.getCompany());
+        term.setText(String.valueOf(patent.getValidity_period()));
+        LocalDate localDate = Instant.ofEpochMilli(patent.getPurchase_date().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        dateStart.setValue(localDate);
+        coast.setText( String.valueOf(patent.getCost()));
+    }
+
 
     @FXML
     private Label message;
@@ -40,6 +66,11 @@ public class AddPatent {
     private TextField name;
     @FXML
     private Button BackButton;
+
+    @FXML
+    private Button SaveButton;
+
+
 
     public void BackButtonPressed(ActionEvent actionEvent) throws IOException {
         Stage stage= (Stage) BackButton.getScene().getWindow();
@@ -60,18 +91,25 @@ public class AddPatent {
         }
         Date startDate=Date.from(Instant.from(dateStart.getValue().atStartOfDay().atZone(ZoneId.systemDefault())));
 
-        Patent patent=new Patent
+        Patent patentAdd=new Patent
                 .PatentBuilder()
                 .name(name.getText())
                 .company(companyName.getText())
-                .cost( BigDecimal.valueOf(Double.parseDouble(coast.getText())))
+                .cost(BigDecimal.valueOf(Double.parseDouble(coast.getText())))
                 .validity_period(Float.parseFloat(term.getText()))
                 .purchase_date(startDate)
                 .build();
-        ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(patent), RequestType.ADD_PATENT)));
+        if (patent!=null){
+            patentAdd.setId(patent.getId());
+            ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(patentAdd), RequestType.UPDATE_PATENT)));
+        }
+        else {
+            ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(new Gson().toJson(patentAdd), RequestType.ADD_PATENT)));
+        }
         ClientSocket.getInstance().getOut().flush();
         Response response=new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
         BackButtonPressed(actionEvent);
 
     }
+
 }

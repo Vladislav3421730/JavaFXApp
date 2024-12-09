@@ -23,17 +23,17 @@ public class ProjectService implements Service<Project> {
 
     @Override
     public void DeleteById(int id) {
-
+        projectDAO.deleteById(id);
     }
 
     @Override
-    public void Update(Project object) {
-
+    public void Update(Project project) {
+        projectDAO.update(project);
     }
 
     @Override
     public Project FindById(int id) {
-        return null;
+        return projectDAO.findById(id).orElse(null);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.models.Project;
+import org.example.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -28,17 +29,32 @@ public class ProjectDAO implements DAO<Project> {
 
     @Override
     public void deleteById(int id) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Project project = session.get(Project.class, id);
+        if (project != null) {
+            Project mergedProject = (Project) session.merge(project);
+            session.delete(mergedProject);
+        }
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
-    public void update(Project object) {
-
+    public void update(Project project) {
+        Session session=sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.saveOrUpdate(project);
+        session.getTransaction().commit();
     }
 
     @Override
     public Optional<Project> findById(int id) {
-        return Optional.empty();
+        Session session=sessionFactory.openSession();
+        session.beginTransaction();
+        Project project=session.get(Project.class,id);
+        session.getTransaction().commit();
+        return Optional.ofNullable(project);
     }
 
     @Override

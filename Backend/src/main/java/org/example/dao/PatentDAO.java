@@ -42,8 +42,11 @@ public class PatentDAO implements DAO<Patent> {
     }
 
     @Override
-    public void update(Patent object) {
-
+    public void update(Patent patent) {
+        Session session=sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.merge(patent);
+        session.getTransaction().commit();
     }
 
     @Override

@@ -12,7 +12,6 @@ public class Main {
     private static final int PORT = 8080;
     private static ServerSocket serverSocket;
     private static List<Socket> currentSockets = new ArrayList<>();
-
     public static void main(String[] args) throws IOException {
         serverSocket = new ServerSocket(PORT);
         System.out.println("Сервер запущен на порту " + PORT);

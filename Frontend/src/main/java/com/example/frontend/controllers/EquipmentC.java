@@ -5,10 +5,10 @@ import com.example.frontend.TCP.Request;
 import com.example.frontend.TCP.Response;
 import com.example.frontend.TCP.enums.RequestType;
 import com.example.frontend.TCP.enums.ResponseType;
-import com.example.frontend.dto.PatentDTO;
-import com.example.frontend.mappers.MapToPatentDTO;
+import com.example.frontend.dto.EquipmentDTO;
+import com.example.frontend.mappers.MapToEquipmentDTO;
+import com.example.frontend.models.entities.Equipment;
 import com.example.frontend.models.entities.Patent;
-import com.example.frontend.models.entities.Project;
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -31,47 +31,63 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Patents implements Initializable {
+public class EquipmentC implements Initializable {
 
     @FXML
     private Label message;
     @FXML
-    private TableView<PatentDTO> table;
+    private TableView<EquipmentDTO> table;
     @FXML
-    private TableColumn<PatentDTO,Integer> id;
+    private TableColumn<EquipmentDTO,Integer> id;
     @FXML
-    private TableColumn<PatentDTO,String> name;
+    private TableColumn<EquipmentDTO,String> name;
     @FXML
-    private TableColumn<PatentDTO,String> company;
+    private TableColumn<EquipmentDTO, BigDecimal> cost;
     @FXML
-    private TableColumn<PatentDTO, BigDecimal> cost;
+    private TableColumn<EquipmentDTO,String> purchase_date;
     @FXML
-    private TableColumn<PatentDTO, String> dateStart;
+    private TableColumn<EquipmentDTO,String> description;
     @FXML
-    private TableColumn<PatentDTO,Float> temp;
+    private TableColumn<EquipmentDTO,Button> editing;
     @FXML
-    private TableColumn<PatentDTO,Button> editing;
-    @FXML
-    private TableColumn<PatentDTO,Button> deleting;
+    private TableColumn<EquipmentDTO,Button> deleting;
+
     @FXML
     private Button BackButton;
 
-    public void refreshTable(){
-        ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(null, RequestType.GET_ALL_PATENTS)));
+    public void BackButtonPressed(ActionEvent actionEvent) throws IOException {
+        Stage stage= (Stage) BackButton.getScene().getWindow();
+        Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/frontend/ManagerPanel.fxml")));
+        stage.setTitle("Панель менеджера");
+        stage.setScene(new Scene(root));
+    }
+
+    public void AddButtonPressed(ActionEvent actionEvent) throws IOException {
+        Stage stage= (Stage) BackButton.getScene().getWindow();
+        Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/frontend/AddEquipment.fxml")));
+        stage.setTitle("Добавление патента");
+        stage.setScene(new Scene(root));
+    }
+
+    private void refreshTable() {
+        ClientSocket.getInstance().getOut().println(new Gson().toJson(new Request(null, RequestType.GET_ALL_EQUIPMENT)));
         ClientSocket.getInstance().getOut().flush();
         try {
             Response response = new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
-            Patent[] patents = new Gson().fromJson(response.getMessage(), Patent[].class);
-            List<PatentDTO> patentDTOS = Arrays.stream(patents).map(MapToPatentDTO::mapToPatentDTO).collect(Collectors.toList());
-            ObservableList<PatentDTO> observablePatentList = FXCollections.observableArrayList(patentDTOS);
-            table.setItems(observablePatentList);
-            observablePatentList.forEach(data->{
+            Equipment[] equipment = new Gson().fromJson(response.getMessage(), Equipment[].class);
+            List<EquipmentDTO> equipmentDTOS = Arrays.stream(equipment).map(MapToEquipmentDTO::mapToEquipmentDTO).collect(Collectors.toList());
+            ObservableList<EquipmentDTO> observableEquipmentList = FXCollections.observableArrayList(equipmentDTOS);
+            table.setItems(observableEquipmentList);
+            observableEquipmentList.forEach(data->{
                 data.getDelete().setOnAction(event->{
                     ClientSocket.getInstance().getOut().println(new Gson()
-                            .toJson(new Request(new Gson().toJson(data.getDelete().getId()), RequestType.DELETE_PATENT)));
+                            .toJson(new Request(new Gson().toJson(data.getDelete().getId()), RequestType.DELETE_EQUIPMENT)));
                     ClientSocket.getInstance().getOut().flush();
                     try {
                         Response responseDelete = new Gson().fromJson(ClientSocket.getInstance().getIn().readLine(), Response.class);
@@ -92,45 +108,31 @@ public class Patents implements Initializable {
                     refreshTable();
                 });
                 data.getChange().setOnAction(event -> {
-                    Stage stage = (Stage) BackButton.getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/AddPatent.fxml"));
+                    Stage stage= (Stage) BackButton.getScene().getWindow();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/AddEquipment.fxml"));
                     try {
                         Parent root = loader.load();
-                        AddPatent controller = loader.getController();
-                        Patent patent=Patent.builder()
+                        AddEquipment controller = loader.getController();
+                        Equipment equipment1= Equipment.builder()
                                 .id(data.getId())
                                 .name(data.getName())
-                                .company(data.getCompany())
+                                .description(data.getDescription())
                                 .purchase_date(data.getPurchase_date())
-                                .validity_period(data.getValidity_period())
                                 .cost(data.getCost())
                                 .build();
-                        controller.setPatent(patent);
-                        stage.setTitle("Редактирование патента");
+                        controller.setEquipment(equipment1);
+                        stage.setTitle("Редактирование оборудования");
                         stage.setScene(new Scene(root));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+
                 });
             });
         } catch (IOException e) {
 
             throw new RuntimeException(e);
         }
-    }
-
-    public void BackButtonPressed(ActionEvent actionEvent) throws IOException {
-        Stage stage= (Stage) BackButton.getScene().getWindow();
-        Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/frontend/ManagerPanel.fxml")));
-        stage.setTitle("Панель менеджера");
-        stage.setScene(new Scene(root));
-    }
-
-    public void AddPatentPressed(ActionEvent actionEvent) throws IOException {
-        Stage stage= (Stage) BackButton.getScene().getWindow();
-        Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/frontend/AddPatent.fxml")));
-        stage.setTitle("Добавление патента");
-        stage.setScene(new Scene(root));
 
     }
 
@@ -138,14 +140,14 @@ public class Patents implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        company.setCellValueFactory(new PropertyValueFactory<>("company"));
         cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        dateStart.setCellValueFactory(data->
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        purchase_date.setCellValueFactory(data->
                 new SimpleStringProperty(new SimpleDateFormat("yyyy.MM.dd").format(data.getValue().getPurchase_date())));
-        temp.setCellValueFactory(new PropertyValueFactory<>("validity_period"));
         deleting.setCellValueFactory(data->new SimpleObjectProperty<>(data.getValue().getDelete()));
         editing.setCellValueFactory(date->new SimpleObjectProperty<>(date.getValue().getChange()));
         refreshTable();
-
     }
+
+
 }

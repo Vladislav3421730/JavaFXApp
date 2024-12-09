@@ -26,8 +26,8 @@ public class PatentService implements Service<Patent> {
     }
 
     @Override
-    public void Update(Patent object) {
-
+    public void Update(Patent patent) {
+        patentDAO.update(patent);
     }
 
     @Override

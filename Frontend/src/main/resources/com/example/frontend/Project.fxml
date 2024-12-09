@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.ProjectCon">
+   <children>
+      <Label layoutX="51.0" layoutY="49.0" text="Название:" />
+      <Label fx:id="title" layoutX="130.0" layoutY="49.0" />
+      <Label layoutX="51.0" layoutY="67.0" text="Описание: " />
+      <Label fx:id="description" layoutX="130.0" layoutY="67.0" />
+      <Label layoutX="51.0" layoutY="85.0" text="Начало:" />
+      <Label fx:id="start" layoutX="130.0" layoutY="85.0" />
+      <Label layoutX="51.0" layoutY="103.0" text="Конец:" />
+      <Label fx:id="end" layoutX="130.0" layoutY="103.0" />
+      <Label layoutX="50.0" layoutY="121.0" text="Бюджет:" />
+      <Label fx:id="budget" layoutX="130.0" layoutY="121.0" />
+      <Label layoutX="50.0" layoutY="139.0" text="Статус:" />
+      <Label fx:id="status" layoutX="130.0" layoutY="139.0" />
+      <TableView fx:id="equipments" layoutX="51.0" layoutY="208.0" prefHeight="170.0" prefWidth="543.0">
+        <columns>
+          <TableColumn fx:id="eqId" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="eqTitle" prefWidth="75.0" text="Название " />
+            <TableColumn fx:id="eqDescription" prefWidth="137.60000610351562" text="Описание" />
+            <TableColumn fx:id="eqStart" prefWidth="55.20001220703125" text="Дата покупки" />
+            <TableColumn fx:id="eqCoast" prefWidth="81.20002746582031" text="Цена" />
+        </columns>
+      </TableView>
+      <Button fx:id="edit" layoutX="130.0" layoutY="14.0" mnemonicParsing="false" text="Редактировать" />
+      <Button fx:id="delete" layoutX="251.0" layoutY="14.0" mnemonicParsing="false" text="Удалить" />
+      <Label layoutX="51.0" layoutY="170.0" text="Оборудование, используемое на проекте" />
+      <TextField fx:id="addEquipmentId" layoutX="55.0" layoutY="411.0" />
+      <Label layoutX="56.0" layoutY="387.0" text="Если хотите добавить новое оборудование в проект или удалить, введите его id" />
+      <TableView fx:id="patents" layoutX="56.0" layoutY="455.0" prefHeight="170.0" prefWidth="580.0">
+         <columns>
+            <TableColumn fx:id="patId" prefWidth="75.0" text="id" />
+            <TableColumn fx:id="patTitle" prefWidth="75.0" text="Название " />
+            <TableColumn fx:id="patCompany" prefWidth="108.00001525878906" text="Комапния" />
+            <TableColumn fx:id="patCoast" prefWidth="84.0" text="Стоимость" />
+            <TableColumn fx:id="patStart" prefWidth="116.79998779296875" text="Дата начала" />
+            <TableColumn fx:id="patDeadline" prefWidth="116.79998779296875" text="Срок проекта" />
+         </columns>
+      </TableView>
+      <Label layoutX="56.0" layoutY="638.0" text="Если хотите добавить новые патенты в проект или удалить, введите его id" />
+      <Button fx:id="addEquipmentButton" layoutX="226.0" layoutY="411.0" mnemonicParsing="false" text="Добавить" />
+      <TextField fx:id="addPatentId" layoutX="55.0" layoutY="664.0" />
+      <Button fx:id="addPatentButton" layoutX="226.0" layoutY="664.0" mnemonicParsing="false" text="Добавить" />
+      <TableView fx:id="workers" layoutX="677.0" layoutY="201.0" prefHeight="183.0" prefWidth="413.0">
+        <columns>
+          <TableColumn fx:id="wId" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="wName" prefWidth="75.0" text="Имя" />
+            <TableColumn fx:id="wSurname" prefWidth="75.0" text="Фамилия" />
+            <TableColumn fx:id="wEmail" prefWidth="75.0" text="email" />
+            <TableColumn fx:id="wPosition" prefWidth="110.40008544921875" text="Должность" />
+        </columns>
+      </TableView>
+      <Label layoutX="797.0" layoutY="170.0" />
+      <Label layoutX="797.0" layoutY="170.0" text="Люди, задействованные на проекте" />
+      <Label layoutX="677.0" layoutY="402.0" text="Если хотите добавить нового человека на проект или удалить, введите его id" />
+      <TextField fx:id="addWorkerId" layoutX="677.0" layoutY="424.0" />
+      <Button fx:id="addWorkerButton" layoutX="840.0" layoutY="424.0" mnemonicParsing="false" text="Добавить" />
+      <TextField fx:id="deleteEquipmentId" layoutX="314.0" layoutY="412.0" />
+      <Button fx:id="deleteEquipmentButton" layoutX="476.0" layoutY="411.0" mnemonicParsing="false" text="Удалить" />
+      <TextField fx:id="deletePatentId" layoutX="314.0" layoutY="664.0" />
+      <Button fx:id="deletePatentButton" layoutX="490.0" layoutY="664.0" mnemonicParsing="false" text="Удалить" />
+      <TextField fx:id="DeleteWorkerId" layoutX="677.0" layoutY="455.0" />
+      <Button fx:id="deleteWorkerButton" layoutX="840.0" layoutY="455.0" mnemonicParsing="false" text="Удалить" />
+      <Button fx:id="back" layoutX="53.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Назад" />
+   </children>
+</AnchorPane>
